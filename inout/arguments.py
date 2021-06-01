@@ -22,7 +22,8 @@ def arguments():
 	
 	parser.add_argument("--out", required=True)
 	parser.add_argument('--savefinalrep', type=int, default=0)
-
+	parser.add_argument('--doclf', type=int, default=1)
+	parser.add_argument('--classifier', type=str, default='knn')
 	args = parser.parse_args()
 
 
@@ -42,6 +43,8 @@ def arguments():
 
 	args.inputdir = f'{args.datain}/{args.dataset}/tfidf/'
 	args.outputdir = f'{args.out}/{args.dataset}/{repname}/'
+
+	args.filename = f'{args.outputdir}/saida{args.classifier}'
 
 	if not os.path.exists(args.outputdir):
 		print(f"Criando saida {args.outputdir}")

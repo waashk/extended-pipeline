@@ -15,7 +15,7 @@ setuptools.setup(
     description="Extended pre-processing pipeline for text classification: On the role of meta-feature representations, sparsification and selective sampling",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://gitlab.com/waashk/pipeline",
+    url="https://gitlab.com/waashk/extended-pipeline",
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
