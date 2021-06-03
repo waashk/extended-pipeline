@@ -50,6 +50,7 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduc
 ## Authors
 
 * **Washington Cunha** - *Initial work* - [waashk](https://gitlab.com/waashk)
+* **Sergio Canuto** - [scanfbr](https://gitlab.com/scanfbr)
 
 See also the list of [contributors](https://gitlab.com/waashk/pipeline/contributors) who participated in this project.
 
