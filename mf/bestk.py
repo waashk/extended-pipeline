@@ -51,7 +51,8 @@ kvalues = {
     'ohsumed': 10,
     'wos5736': 70,
     'wos11967': 100,
-    'cade12': 40,
+    #'cade12': 40,
+    'cade12': 30,
 }
 
 def findBestKsaved(dataset):

@@ -4,6 +4,7 @@ from tqdm import tqdm
 
 from mf.knnbased import MFKnn
 from mf.centbased import MFCent
+from mf.hyperplanebased import MFHyperPlaneErrors, MFHyperPlaneAcima
 
 
 class MetaFeatures(object):
@@ -34,6 +35,16 @@ class MetaFeatures(object):
 				estimator = MFKnn(metric, self.k)
 			elif approach == 'cent':
 				estimator = MFCent(metric)
+			#TODO: Remover apos refatorar codigo mf err
+			elif approach == 'err':
+				continue
+			#elif approach == 'hyperplane_errors':
+			#	#cos_knn_treino,cos_knn_teste = hyperplane_errors(X_treino, y_treino, X_teste, y_teste, n_classes, f, k, 'cosine', 'original', save=False)
+			#	estimator = MFHyperPlaneErrors(metric, self.k)			
+			#elif approach == 'hyperplane_acima':
+        	#	#cos_knn_treino,cos_knn_teste = hyperplane_acima(X_treino, y_treino, X_teste, y_teste, n_classes, f, k, 'cosine', 'original', save=False)
+			#	estimator = MFHyperPlaneAcima(metric, self.k)	
+
 
 			self.estimators.append(estimator.fit(X,y))
 
@@ -55,4 +66,13 @@ class MetaFeatures(object):
 				X_all = np.hstack((X_all, X_list[i]))
 
 		print(X_all.shape)
+
+		print(type(X_all))
+		#print(X_all[0])
+		#print(np.nan in X)
+		array_sum = np.sum(X_all)
+		array_has_nan = np.isnan(array_sum)
+		if array_has_nan:
+			X_all = np.nan_to_num(X_all)
+		
 		return X_all
