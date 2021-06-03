@@ -1,7 +1,10 @@
-
 # Extended pre-processing pipeline for text classification: On the role of meta-feature representations, sparsification and selective sampling
 
 This repository contains an **Unofficial** Python 3 implementation of Metafeatures method proposed on **A Thorough Evaluation of Distance-Based Meta-Features for Automated Text Classification** and extended as meta-feature representation phase of Extended pre-processing pipeline for text classification.
+
+## Acknowledgment
+
+I would like to acknowledge to Sergio Canuto for sharing the original code of [error-based](errbased.py) Metafeatures. Thank you.
 
 ## Original Citation
 
