@@ -16,24 +16,19 @@ import copy
 from collections import Counter
 import socket
 import json
+import time
 
 def main():
 	gc.collect()
 	args = arguments()
 
-	#for f in range(1): #args.folds
-	for f in range(args.folds):
+	for f in range(1): #args.folds
+	#for f in range(args.folds):
 		print("Fold {}".format(f))
 
 		X_train, y_train, X_test, y_test, _ = get_data(args.inputdir, f)
 		X_train_tfidf = copy.copy(X_train) 
 		X_test_tfidf = copy.copy(X_test)
-
-		if args.dataset == 'cade12':
-			y_train = y_train - 1
-			y_test = y_test - 1
-
-		print(Counter(y_train))
 
 		#(metric, approach)
 		#groups = [("cosine", "knn"), ("cosine", "cent"), ("l2", "knn"), ("l2", "cent")]
@@ -42,10 +37,16 @@ def main():
 				k = findBestKsaved(args.dataset)
 			except:
 				k = findBestK(X_train, y_train)
+
+			t_init = time.time()
 			mf = MetaFeatures(groups=args.mfgroups, k=k)
 			mf.fit(X_train, y_train)
 			X_train = mf.transform(X_train)
+			t_train = time.time() - t_init 
+
+			t_init = time.time()
 			X_test  = mf.transform(X_test)
+			t_test = time.time() - t_init 
 			#TODO: Remover apos refatorar codigo mf err
 			if 'err' in args.MFapproach:
 
@@ -82,16 +83,18 @@ def main():
 			print_in_file(f"\tMacro: {macro}", args.filename)
 
 
-			data = {
-				"hiperparams": str(args),
-				"machine": socket.gethostname(),
-				"micro": micro,
-				"macro": macro,
-			}
+		data = {
+			"hiperparams": str(args),
+			"machine": socket.gethostname(),
+			#"micro": micro,
+			#"macro": macro,
+			"mf_train": t_train,
+			"mf_test": t_test,
+		}
 
-			filename = f"{args.outputdir}/out"
-			with open(f"{filename}.fold={f}.json", 'w') as outfile:
-				json.dump(data, outfile, indent=4)
+		filename = f"{args.outputdir}/out"
+		with open(f"{filename}.fold={f}.json", 'w') as outfile:
+			json.dump(data, outfile, indent=4)
 
 
 if __name__ == '__main__':
