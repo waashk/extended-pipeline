@@ -14,13 +14,15 @@ from classifiers.config import getClassifierInfo
 from sklearn.metrics import f1_score
 import copy
 from collections import Counter
+import socket
+import json
 
 def main():
 	gc.collect()
 	args = arguments()
 
-	for f in range(1): #args.folds
-	#for f in range(args.folds):
+	#for f in range(1): #args.folds
+	for f in range(args.folds):
 		print("Fold {}".format(f))
 
 		X_train, y_train, X_test, y_test, _ = get_data(args.inputdir, f)
@@ -36,8 +38,10 @@ def main():
 		#(metric, approach)
 		#groups = [("cosine", "knn"), ("cosine", "cent"), ("l2", "knn"), ("l2", "cent")]
 		if args.mfgroups:
-			#k = findBestK(X_train, y_train)
-			k = findBestKsaved(args.dataset)
+			try:
+				k = findBestKsaved(args.dataset)
+			except:
+				k = findBestK(X_train, y_train)
 			mf = MetaFeatures(groups=args.mfgroups, k=k)
 			mf.fit(X_train, y_train)
 			X_train = mf.transform(X_train)
@@ -76,6 +80,18 @@ def main():
 			print_in_file(f"\tMicro: {micro}", args.filename)
 			print("\tMacro: ", macro)
 			print_in_file(f"\tMacro: {macro}", args.filename)
+
+
+			data = {
+				"hiperparams": str(args),
+				"machine": socket.gethostname(),
+				"micro": micro,
+				"macro": macro,
+			}
+
+			filename = f"{args.outputdir}/out"
+			with open(f"{filename}.fold={f}.json", 'w') as outfile:
+				json.dump(data, outfile, indent=4)
 
 
 if __name__ == '__main__':
