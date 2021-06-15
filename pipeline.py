@@ -22,8 +22,8 @@ def main():
 	gc.collect()
 	args = arguments()
 
-	for f in range(1): #args.folds
-	#for f in range(args.folds):
+	#for f in range(1): #args.folds
+	for f in range(args.folds):
 		print("Fold {}".format(f))
 
 		X_train, y_train, X_test, y_test, _ = get_data(args.inputdir, f)
@@ -88,8 +88,9 @@ def main():
 			"machine": socket.gethostname(),
 			#"micro": micro,
 			#"macro": macro,
-			"mf_train": t_train,
-			"mf_test": t_test,
+			"mf_train_time": t_train,
+			"mf_test_time": t_test,
+			"mf_total_time": t_train + t_test,
 		}
 
 		filename = f"{args.outputdir}/out"
