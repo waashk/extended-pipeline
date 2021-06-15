@@ -91,6 +91,7 @@ def main():
 			"mf_train_time": t_train,
 			"mf_test_time": t_test,
 			"mf_total_time": t_train + t_test,
+			"mf_k":k,
 		}
 
 		filename = f"{args.outputdir}/out"
