@@ -31,12 +31,13 @@ def arguments():
 
 args = arguments()
 
-datasets = ["20ng", "acm", "reut90", "webkb", "ohsumed", "wos5736", "wos11967", "books", "dblp", "trec", "pang_movie_2L", "vader_movie_2L", "yelp_review_2L", "vader_nyt_2L", "mr", "sst1", "sst2", "subj", "mpqa"]
+datasets = ["20ng", "acm", "reut90", "webkb", "ohsumed", "wos5736", "wos11967", "books", "dblp", "trec", "pang_movie_2L", "vader_movie_2L", "yelp_reviews_2L", "vader_nyt_2L", "mr", "sst1", "sst2", "subj", "mpqa"]
 
 for dataset in datasets:
 
-	if dataset in ["mr", "sst1", "sst2", "subj", "mpqa"]:
-		args.path = f"outerr/{dataset}/tfidf_mf_cosine_knn_l2_knn_cosine_cent_l2_cent/"
+	#print(dataset)
+	if dataset in ["sst2", "subj", "mpqa"]:
+		args.path = f"out/{dataset}/tfidf_mf_cosine_knn_l2_knn_cosine_cent_l2_cent_cosine_err/"
 	else:
 		args.path = f"out/{dataset}/tfidf_mf_cosine_knn_l2_knn_cosine_cent_l2_cent/"
 
