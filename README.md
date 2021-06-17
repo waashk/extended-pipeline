@@ -50,9 +50,16 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduc
 ## Authors
 
 * **Washington Cunha** - *Initial work* - [waashk](https://gitlab.com/waashk)
+* **Sergio Canuto** - [scanfbr](https://gitlab.com/scanfbr)
 
 See also the list of [contributors](https://gitlab.com/waashk/pipeline/contributors) who participated in this project.
 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
+## Example 
+
+```
+python pipeline.py -d webkb --folds 10 --out out --datain datasets/ --MFmetric cosine l2 --MFapproach knn cent --cover 0.70
+```

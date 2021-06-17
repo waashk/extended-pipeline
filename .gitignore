@@ -2,3 +2,5 @@ env
 teste
 out
 _aux
+outerr
+*/__pycache__
